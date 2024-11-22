@@ -65,9 +65,11 @@
                         ViewContext.RouteData.Values["controller"]?.ToString() == "Home")
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Lecturer">Lecturer</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Dashboard">My Dashboard</a>
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Lecturer">My Claims</a>
+                            </li>
                             <li class="nav-item right-align">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Sign-Out</a>
                             </li>
@@ -76,9 +78,11 @@
                         ViewContext.RouteData.Values["controller"]?.ToString() == "Home")
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Lecturer">Lecturer</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Dashboard">My Dashboard</a>
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Lecturer">My Claims</a>
+                            </li>
                             <li class="nav-item right-align">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Sign-Out</a>
                             </li>
@@ -87,12 +91,29 @@
                         ViewContext.RouteData.Values["controller"]?.ToString() == "Home")
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Lecturer">Lecturer</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Dashboard">My Dashboard</a>
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Lecturer">My Claims</a>
+                            </li>
                             <li class="nav-item right-align">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Sign-Out</a>
                             </li>
+
+                        }
+                        @if (ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" &&
+                        ViewContext.RouteData.Values["controller"]?.ToString() == "Home")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Dashboard">My Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Lecturer">My Claims</a>
+                            </li>
+                            <li class="nav-item right-align">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Sign-Out</a>
+                            </li>
+
                         }
                     </ul>
                 </div>

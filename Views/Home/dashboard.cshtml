@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model dynamic
+
+<div class="text-center">
+    <h1 class="display-4">My Dashboard</h1>
+    <h2>Welcome, @Model.LecturerName!</h2>
+
+    <table class="table table-striped mt-4">
+        <tbody>
+            <tr>
+                <th class ="text-white fw-bold" style="font-size: 1.25rem;">Total Earned (R)</th>
+                <td>R@(Model.TotalEarned.ToString("F2"))</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Total Hours Worked</th>
+                <td>@Model.TotalHoursWorked</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Average Hourly Rate (R)</th>
+                <td>R@(Model.AverageHourlyRate.ToString("F2"))</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Total Pending (R)</th>
+                <td>R@(Model.TotalPending.ToString("F2"))</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Acceptance (%)</th>
+                <td>@Model.AcceptedPercentage.ToString("0.00")%</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Earliest Claim</th>
+                <td>@Model.EarliestClaim.ToShortDateString()</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Latest Claim</th>
+                <td>@Model.LatestClaim.ToShortDateString()</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

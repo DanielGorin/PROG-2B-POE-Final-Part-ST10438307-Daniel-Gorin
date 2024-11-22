@@ -40,7 +40,11 @@ namespace PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Controllers
         public IActionResult Admin()
         {
             // Fetch all claims from the database
-            var claims = _context.Claims.ToList();
+            var claims = _context.Claims
+                                   .OrderByDescending(c => c.Status == "Pending")
+                                   .ThenByDescending(c => c.DateLogged)
+                                   .ThenBy(c => c.ClaimantName)
+                                   .ToList();
 
             // Pass the claims list to the Admin view
             return View(new { Claims = claims });
@@ -81,6 +85,8 @@ namespace PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Controllers
             string fullName = $"{firstName} {lastName}";
             var claims = _context.Claims
                                  .Where(c => c.ClaimantName == fullName)
+                                 .OrderByDescending(c => c.Status == "Pending")
+                                 .ThenByDescending(c => c.DateLogged)
                                  .ToList();
 
             return View(claims);
@@ -295,6 +301,82 @@ namespace PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Controllers
 
             return View(model);
         }
+        //page displaying a lecturers own infromation
+        public IActionResult Dashboard()
+        {
+            // Retrieve lecturer data from session
+            string firstName = HttpContext.Session.GetString("LecturerFirstName");
+            string lastName = HttpContext.Session.GetString("LecturerLastName");
+
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
+            {
+                return RedirectToAction("LecturerSignIn");
+            }
+
+            string fullName = $"{firstName} {lastName}";
+
+            // Fetch all claims for the lecturer
+            var lecturerClaims = _context.Claims.Where(c => c.ClaimantName == fullName).ToList();
+
+            if (!lecturerClaims.Any())
+            {
+                return View(new
+                {
+                    LecturerName = fullName,
+                    TotalEarned = 0,
+                    TotalPending = 0,
+                    TotalHoursWorked = 0,
+                    AverageHourlyRate = 0,
+                    AcceptedPercentage = 0,
+                    EarliestClaim = (DateTime?)null,
+                    LatestClaim = (DateTime?)null
+                });
+            }
+
+            // Calculate dashboard data
+            var totalEarned = lecturerClaims
+                .Where(c => c.Status == "Approved")
+                .Sum(c => c.HourlyRate * c.HoursWorked);
+
+            var totalPending = lecturerClaims
+                .Where(c => c.Status == "Pending")
+                .Sum(c => c.HourlyRate * c.HoursWorked);
+
+            var totalHoursWorked = lecturerClaims
+                .Where(c => c.Status == "Approved")
+                .Sum(c => c.HoursWorked);
+
+            var averageHourlyRate = totalHoursWorked > 0
+                ? lecturerClaims.Where(c => c.Status == "Approved").Average(c => c.HourlyRate)
+                : 0;
+
+            var acceptedClaims = lecturerClaims.Count(c => c.Status == "Approved");
+            var totalClaims = lecturerClaims.Count();
+            var acceptedPercentage = totalClaims > 0
+                ? (acceptedClaims / (double)totalClaims) * 100
+                : 0;
+
+            var earliestClaim = lecturerClaims.Min(c => c.DateLogged);
+            var latestClaim = lecturerClaims.Max(c => c.DateLogged);
+
+            // Pass data to the view
+            var model = new
+            {
+                LecturerName = fullName,
+                TotalEarned = totalEarned,
+                TotalPending = totalPending,
+                TotalHoursWorked = totalHoursWorked,
+                AverageHourlyRate = averageHourlyRate,
+                AcceptedPercentage = acceptedPercentage,
+                EarliestClaim = earliestClaim,
+                LatestClaim = latestClaim
+            };
+
+            return View(model);
+        }
+
+
     }
+
 
 }
