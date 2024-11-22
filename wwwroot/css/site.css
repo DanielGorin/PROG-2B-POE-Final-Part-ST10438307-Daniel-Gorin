@@ -40,6 +40,17 @@ table.table-striped thead th {
     background-color: DarkSlateBlue; /* Set the desired background color */
     color: white; /* Set the text color */
 }
+/* Add gap between navbar tabs */
+.navbar-nav .nav-item {
+    margin-right: 7px; /* Adjust the spacing */
+}
+
+/* Add a white line between tabs */
+.navbar-nav .nav-link {
+    padding-right: 15px; /* Space on the right for the line */
+}
+
+
 
 /* Change the link colors in the navbar */
 .navbar-custom .nav-link {
@@ -53,12 +64,18 @@ table.table-striped thead th {
 .navbar-custom .navbar-brand:hover {
     color: lightgray; /* Change brand color on hover */
 }
+.navb
 body, html { /*change the base font to andale*/
     font-family: "Andale Mono", monospace;
 }
 .navbar-brand {/* used to control the CMCS Logo in the top left*/
     font-size: 3rem; 
     font-family: "Copperplate", "Copperplate Gothic Light", "Arial", sans-serif;
+}
+/* Ensure proper alignment for the last tab */
+.navbar-nav .nav-item.right-align {
+    margin-left: auto; /* Pushes this tab to the right */
+*
 }
 input[type="text"], input[type="number"], textarea { /* Controls texboxes */
     max-width: 350px;

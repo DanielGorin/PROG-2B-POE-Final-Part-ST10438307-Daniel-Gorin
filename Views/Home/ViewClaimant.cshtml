@@ -1,0 +1,40 @@
+﻿@model dynamic
+
+<div class="text-center">
+    <button class="btn btn-secondary mt-3" onclick="location.href='/Home/HR'">Return</button>
+    <h1 class="display-4">Claimant Details</h1>
+    <h2 class="mt-3">@Model.ClaimantName</h2>
+
+    <table class="table table-striped mt-4">
+        <tbody>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Total Earned (R)</th>
+                <td>R@(Model.TotalEarned.ToString("F2"))</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Total Hours Worked</th>
+                <td>@Model.TotalHoursWorked</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Average Hourly Rate (R)</th>
+                <td>R@(Model.AverageHourlyRate.ToString("F2"))</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Total Pending (R)</th>
+                <td>R@(Model.TotalPending.ToString("F2"))</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Acceptance (%)</th>
+                <td>@Model.AcceptedPercentage.ToString("0.00")%</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Earliest Claim</th>
+                <td>@Model.EarliestClaim.ToShortDateString()</td>
+            </tr>
+            <tr>
+                <th class="text-white fw-bold" style="font-size: 1.25rem;">Latest Claim</th>
+                <td>@Model.LatestClaim.ToShortDateString()</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

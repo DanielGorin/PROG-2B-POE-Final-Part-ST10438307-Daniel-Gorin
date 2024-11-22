@@ -241,6 +241,60 @@ namespace PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Controllers
             // Pass HR data to the view
             return View(hrData);
         }
+        //page displaying detailed infromation about a specific claimant
+        public IActionResult ViewClaimant(string claimantName)
+        {
+            if (string.IsNullOrEmpty(claimantName))
+            {
+                return NotFound("Claimant name is required.");
+            }
+
+            // Fetch all claims for the specified claimant
+            var claimantClaims = _context.Claims.Where(c => c.ClaimantName == claimantName).ToList();
+
+            if (!claimantClaims.Any())
+            {
+                return NotFound($"No claims found for claimant: {claimantName}");
+            }
+
+            // Calculate details for the claimant
+            var totalEarned = claimantClaims.Where(c => c.Status == "Approved")
+                                            .Sum(c => c.HourlyRate * c.HoursWorked);
+
+            var totalPending = claimantClaims.Where(c => c.Status == "Pending")
+                                             .Sum(c => c.HourlyRate * c.HoursWorked);
+
+            var totalHoursWorked = claimantClaims.Where(c=> c.Status == "Approved")
+                                            .Sum(c => c.HoursWorked);
+            var averageHourlyRate = totalHoursWorked > 0
+                ? claimantClaims.Average(c => c.HourlyRate)
+                : 0;
+
+            var acceptedClaims = claimantClaims.Count(c => c.Status == "Approved");
+            var deniedClaims = claimantClaims.Count(c => c.Status == "Denied");
+            var totalClaims = acceptedClaims+deniedClaims;
+            var acceptedPercentage = totalClaims > 0
+                ? (acceptedClaims / (double)totalClaims) * 100
+                : 0;
+
+            var earliestClaim = claimantClaims.Min(c => c.DateLogged);
+            var latestClaim = claimantClaims.Max(c => c.DateLogged);
+
+            // Pass data to the view
+            var model = new
+            {
+                ClaimantName = claimantName,
+                TotalEarned = totalEarned,
+                TotalPending = totalPending,
+                TotalHoursWorked = totalHoursWorked,
+                AverageHourlyRate = averageHourlyRate,
+                AcceptedPercentage = acceptedPercentage,
+                EarliestClaim = earliestClaim,
+                LatestClaim = latestClaim
+            };
+
+            return View(model);
+        }
     }
 
 }

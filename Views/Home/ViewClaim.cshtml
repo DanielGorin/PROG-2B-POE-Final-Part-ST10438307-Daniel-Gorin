@@ -1,6 +1,7 @@
 ﻿@model PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Models.Claims
 
 <div class="text-center">
+    <button class="btn btn-secondary mt-3" onclick="location.href='/Home/Admin'">Return</button>
     <h1 class="display-4">Claim Details</h1>
     <p><strong>Claim ID:</strong> @Model.ClaimId</p>
     <p><strong>Claimant Name:</strong> @Model.ClaimantName</p>
@@ -31,6 +32,7 @@
             </button>
         </div>
     }
+
 
     <!-- Evaluate Claim Button -->
     <div class="mt-4">

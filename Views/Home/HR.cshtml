@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<dynamic>
 
 <div class="text-center">
-    <h1 class="display-4">HR Management</h1>
+    <h1 class="display-4">Claimant Management</h1>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -9,6 +9,7 @@
                 <th>Earliest Claim</th>
                 <th>Total Earned (R)</th>
                 <th>Total Pending (R)</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -17,11 +18,13 @@
                 <tr>
                     <td>@record.FullName</td>
                     <td>@record.EarliestClaim.ToShortDateString()</td>
-                    <td>R@record.TotalEarned</td>
-                    <td>R@record.TotalPending</td>
+                    <td>R@(record.TotalEarned.ToString("F2"))</td>
+                    <td>R@(record.TotalPending.ToString("F2"))</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="location.href='/Home/ViewClaimant?claimantName=@record.FullName'">View Claimant</button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
-    <button class="btn btn-primary mt-3" onclick="location.href='/Home/Admin'">Back to Admin Page</button>
 </div>
