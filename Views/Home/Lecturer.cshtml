@@ -1,0 +1,30 @@
+﻿@{
+    @model IEnumerable<PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Models.Claims>
+}
+<div class="text-center">
+    <h1 class="display-4">My Claims</h1>
+    <button class="btn btn-success mb-3" onclick="location.href='/Home/SubmitClaim'">Create New Claim</button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date Logged</th>
+                <th>Total Owed</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.DateLogged.ToShortDateString()</td>
+                    <td>R@(claim.HourlyRate * claim.HoursWorked)</td>
+                    <td>@claim.Status</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="location.href='/Home/LecturerViewClaim?claimId=@claim.ClaimId'">View</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

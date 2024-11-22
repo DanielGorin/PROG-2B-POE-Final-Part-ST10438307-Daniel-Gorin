@@ -1,0 +1,33 @@
+﻿@model PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Models.Claims
+
+<div class="text-center">
+    <h1 class="display-4">Claim Details</h1>
+    <p><strong>Claim ID:</strong> @Model.ClaimId</p>
+    <p><strong>Claimant Name:</strong> @Model.ClaimantName</p>
+    <p><strong>Hours Worked:</strong> @Model.HoursWorked</p>
+    <p><strong>Hourly Rate: R</strong>@Model.HourlyRate</p>
+    <p><strong>Total: R</strong>@(Model.HourlyRate * Model.HoursWorked)</p>
+    <p>
+        <strong>Status:</strong>
+        <span style="@((Model.Status == "Approved") ? "color: lime;"
+                          : (Model.Status == "Denied") ? "color: #ff3333;"
+                          : "text-decoration: underline;")">
+            @Model.Status
+        </span>
+    </p>
+    <p><strong>Comments:</strong> @Model.ClaimantComments</p>
+
+    @if (Model.Status == "Pending")
+    {
+        <div class="mt-4">
+            <button class="btn btn-success"
+                    onclick="location.href='/Home/ApproveClaim?claimId=@Model.ClaimId'">
+                Approve
+            </button>
+            <button class="btn btn-danger"
+                    onclick="location.href='/Home/DenyClaim?claimId=@Model.ClaimId'">
+                Deny
+            </button>
+        </div>
+    }
+</div>

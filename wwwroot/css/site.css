@@ -1,0 +1,68 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: darkorchid;
+    color: white;
+}
+
+h1, p, label {
+    color: white;
+    font-size: 1.2rem;
+}
+table.table-striped tbody tr td {
+    color: white; /* Change the font color to white */
+    font-size: 1.5rem;
+}
+
+table.table-striped thead th {
+    color: white; /* Ensure header text is also white */
+}
+/* Change the background color of the navbar */
+.navbar-custom {
+    background-color: DarkSlateBlue; /* Set the desired background color */
+    color: white; /* Set the text color */
+}
+
+/* Change the link colors in the navbar */
+.navbar-custom .nav-link {
+    color: white; /* Set the link text color */
+}
+
+.navbar-custom .nav-link:hover {
+    color: lightgray; /* Change link color on hover */
+}
+
+.navbar-custom .navbar-brand:hover {
+    color: lightgray; /* Change brand color on hover */
+}
+body, html { /*change the base font to andale*/
+    font-family: "Andale Mono", monospace;
+}
+.navbar-brand {/* used to control the CMCS Logo in the top left*/
+    font-size: 3rem; 
+    font-family: "Copperplate", "Copperplate Gothic Light", "Arial", sans-serif;
+}
+input[type="text"], input[type="number"], textarea { /* Controls texboxes */
+    max-width: 350px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
