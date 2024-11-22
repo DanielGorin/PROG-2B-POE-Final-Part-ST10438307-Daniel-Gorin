@@ -5,8 +5,8 @@
     <p><strong>Claim ID:</strong> @Model.ClaimId</p>
     <p><strong>Claimant Name:</strong> @Model.ClaimantName</p>
     <p><strong>Hours Worked:</strong> @Model.HoursWorked</p>
-    <p><strong>Hourly Rate: R</strong>@Model.HourlyRate</p>
-    <p><strong>Total: R</strong>@(Model.HourlyRate * Model.HoursWorked)</p>
+    <p><strong>Hourly Rate:</strong> R@Model.HourlyRate</p>
+    <p><strong>Total:</strong> R@(Model.HoursWorked * Model.HourlyRate)</p>
     <p>
         <strong>Status:</strong>
         <span style="@((Model.Status == "Approved") ? "color: lime;"
@@ -30,4 +30,12 @@
             </button>
         </div>
     }
+
+    <!-- Add the Delete button -->
+    <div class="mt-4">
+        <button class="btn btn-danger"
+                onclick="if(confirm('Are you sure you want to delete this claim?')) location.href='/Home/DeleteClaim?claimId=@Model.ClaimId'">
+            Delete
+        </button>
+    </div>
 </div>

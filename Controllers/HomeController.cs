@@ -188,6 +188,23 @@ namespace PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Controllers
             // Redirect back to the ViewClaim page
             return RedirectToAction("ViewClaim", new { claimId = claimId });
         }
+        public IActionResult DeleteClaim(int claimId)
+        {
+            // Fetch the claim from the database by ID
+            var claim = _context.Claims.FirstOrDefault(c => c.ClaimId == claimId);
+
+            if (claim == null)
+            {
+                return NotFound("Claim not found.");
+            }
+
+            // Remove the claim from the database
+            _context.Claims.Remove(claim);
+            _context.SaveChanges();
+
+            // Redirect to a page (e.g., Admin or Lecturer)
+            return RedirectToAction("Admin"); // Redirect back to Admin page after deletion
+        }
     }
 
 }
