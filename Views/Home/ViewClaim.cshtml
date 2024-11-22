@@ -23,11 +23,11 @@
     {
         <div class="mt-4">
             <button class="btn btn-success"
-                    onclick="location.href='/Home/ApproveClaim?claimId=@Model.ClaimId'">
+                    onclick="location.href='/Home/ApproveClaim?claimId=@Model.ClaimId'"><!--Approves the Claim-->
                 Approve
             </button>
             <button class="btn btn-danger"
-                    onclick="location.href='/Home/DenyClaim?claimId=@Model.ClaimId'">
+                    onclick="location.href='/Home/DenyClaim?claimId=@Model.ClaimId'"><!--Denies the Claim-->
                 Deny
             </button>
         </div>
@@ -69,10 +69,10 @@
             recommendationText.textContent = "Accept";
 
             if (hRate < 27.58) {
-                evaluationText.textContent += `The hourly rate of R${hRate.toFixed(2)} is below minimum wage (R27.58/hour). This claim cannot be accepted. `;
+                evaluationText.textContent += `The hourly rate of R${hRate.toFixed(2)} is below minimum wage (R27.58/hour). `;
                 recommendationText.textContent = "Deny";
             } else if (hRate > 1000) {
-                evaluationText.textContent += `The hourly rate of R${hRate.toFixed(2)} is above the maximum accepted amount (R1000/hour). This claim should not be accepted. `;
+                evaluationText.textContent += `The hourly rate of R${hRate.toFixed(2)} is above the maximum accepted amount (R1000/hour). `;
                 recommendationText.textContent = "Deny";
             }
 
