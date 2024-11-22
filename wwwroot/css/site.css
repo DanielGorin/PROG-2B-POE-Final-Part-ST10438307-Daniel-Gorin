@@ -66,3 +66,18 @@ input[type="text"], input[type="number"], textarea { /* Controls texboxes */
     display: block;
     margin: 0 auto;
 }
+/* Controls textboxes and auto-filled sections */
+input[type="text"], input[type="number"], textarea, .form-control-readonly {
+    max-width: 350px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    background-color: #f8f9fa; /* Light background for read-only fields */
+    color: black; /* Ensure text is visible */
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-family: "Andale Mono", monospace;
+    text-align: left;
+}

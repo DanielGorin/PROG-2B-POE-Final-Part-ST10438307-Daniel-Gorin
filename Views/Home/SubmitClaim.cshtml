@@ -1,22 +1,63 @@
 ﻿@{
     ViewData["Title"] = "Submit a Claim";
+    string fullName = ViewBag.FullName as string;
+    string todayDate = ViewBag.TodayDate as string;
 }
 
 <div class="text-center">
     <h1 class="display-4">Submit a Claim</h1>
+
     <form method="post" action="/Home/SubmitClaim">
+        <!-- Auto-filled Name -->
         <div class="form-group">
-            <label for="HourlyRate">Hourly Rate</label>
-            <input type="number" id="HourlyRate" name="HourlyRate" class="form-control" step="0.01" required>
+            <label for="FullName">Name:</label>
+            <div id="FullName" class="form-control-readonly">@fullName</div>
         </div>
+
+        <!-- Auto-filled Date -->
+        <div class="form-group">
+            <label for="Date">Date:</label>
+            <div id="Date" class="form-control-readonly">@todayDate</div>
+        </div>
+
+        <!-- Input Hours Worked -->
         <div class="form-group">
             <label for="HoursWorked">Hours Worked</label>
-            <input type="number" id="HoursWorked" name="HoursWorked" class="form-control" required>
+            <input type="number" id="HoursWorked" name="HoursWorked" class="form-control" oninput="calculateTotal()" step="0.01" required>
         </div>
+
+        <!-- Input Hourly Rate -->
+        <div class="form-group">
+            <label for="HourlyRate">Hourly Rate</label>
+            <input type="number" id="HourlyRate" name="HourlyRate" class="form-control" oninput="calculateTotal()" step="0.01" required>
+        </div>
+
+        <!-- Live Calculation for Total Owed -->
+        <div class="form-group">
+            <label for="TotalOwed">Total Owed:</label>
+            <div id="TotalOwedDisplay" class="form-control-readonly">R0.00</div>
+            <input type="hidden" id="TotalOwed" name="TotalOwed" value="0.00">
+        </div>
+
+        <!-- Comments -->
         <div class="form-group">
             <label for="ClaimantComments">Comments</label>
             <textarea id="ClaimantComments" name="ClaimantComments" class="form-control" required></textarea>
         </div>
+
+        <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
 </div>
+
+<script>
+    // Calculate the Total Owed in real-time
+    function calculateTotal() {
+        const hoursWorked = parseFloat(document.getElementById("HoursWorked").value) || 0;
+        const hourlyRate = parseFloat(document.getElementById("HourlyRate").value) || 0;
+        const total = hoursWorked * hourlyRate;
+
+        document.getElementById("TotalOwed").value = total.toFixed(2); // Hidden input for form submission
+        document.getElementById("TotalOwedDisplay").textContent = "R" + total.toFixed(2); // Display for user
+    }
+</script>

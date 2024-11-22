@@ -5,8 +5,8 @@
     <p><strong>Claim ID:</strong> @Model.ClaimId</p>
     <p><strong>Claimant Name:</strong> @Model.ClaimantName</p>
     <p><strong>Hours Worked:</strong> @Model.HoursWorked</p>
-    <p><strong>Hourly Rate:</strong> R@Model.HourlyRate</p>
-    <p><strong>Total:</strong> R@(Model.HoursWorked * Model.HourlyRate)</p>
+    <p><strong>Hourly Rate: R</strong>@Model.HourlyRate</p>
+    <p><strong>Total: R</strong>@(Model.HoursWorked * Model.HourlyRate)</p>
     <p>
         <strong>Status:</strong>
         <span style="@((Model.Status == "Approved") ? "color: lime;"

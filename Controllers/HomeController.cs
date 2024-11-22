@@ -117,6 +117,20 @@ namespace PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Controllers
         [HttpGet]
         public IActionResult SubmitClaim()
         {
+            // Retrieve lecturer data from session
+            string firstName = HttpContext.Session.GetString("LecturerFirstName");
+            string lastName = HttpContext.Session.GetString("LecturerLastName");
+
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
+            {
+                // Redirect to sign-in page if session data is missing
+                return RedirectToAction("LecturerSignIn");
+            }
+
+            // Pass data to the view
+            ViewBag.FullName = $"{firstName} {lastName}";
+            ViewBag.TodayDate = DateTime.Now.ToString("yyyy-MM-dd");
+
             return View();
         }
         //submition function
