@@ -219,6 +219,28 @@ namespace PROG_2B_POE_Final_Part_ST10438307_Daniel_Gorin.Controllers
             // Redirect to a page (e.g., Admin or Lecturer)
             return RedirectToAction("Admin"); // Redirect back to Admin page after deletion
         }
+        //page used to display information about individual claimants
+        public IActionResult HR()
+        {
+            // Group claims by claimant name
+            var hrData = _context.Claims
+                .GroupBy(c => c.ClaimantName)
+                .Select(group => new
+                {
+                    FullName = group.Key,
+                    EarliestClaim = group.Min(c => c.DateLogged),
+                    TotalEarned = group
+                        .Where(c => c.Status == "Approved")
+                        .Sum(c => c.HourlyRate * c.HoursWorked),
+                    TotalPending = group
+                        .Where(c => c.Status == "Pending")
+                        .Sum(c => c.HourlyRate * c.HoursWorked)
+                })
+                .ToList();
+
+            // Pass HR data to the view
+            return View(hrData);
+        }
     }
 
 }
